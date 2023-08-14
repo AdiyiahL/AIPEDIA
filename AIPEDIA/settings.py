@@ -23,13 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mk)t4)615gti&5t2h$)4drjz@apoy0r#7+=zgr$c$in11(u9sn'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -93,8 +93,8 @@ DATABASES = {
     }
 }
 # for render-----------
-# database_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse("postgres://aipedia_django_render_user:hY2DHosbAwEc2AAimOnQlCouLL1n0K8e@dpg-cj9s7igp288c73bbs4lg-a.oregon-postgres.render.com/aipedia_django_render")
+database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(database_url)
 # for render-----------
 
 # Password validation
