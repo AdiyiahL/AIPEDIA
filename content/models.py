@@ -15,7 +15,7 @@ class NewContent(models.Model):
     userId = models.ForeignKey(verbose_name="author", to=users.models.UserInfo,on_delete=models.CASCADE)
     # 上传图片封面
     image_name = models.CharField(max_length=200, null=False, blank=True)
-    image_data = models.ImageField(upload_to='user_images', default='user_image.jpg')
+    image_data = models.ImageField(upload_to='content', default='user_image.jpg')
 
 
 class NewCourses(models.Model):
