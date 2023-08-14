@@ -1,0 +1,59 @@
+.chara2 {
+    position: absolute;
+    top: 360px;
+    left: 270px;
+    width: 170px;
+    z-index: 99999999999;
+
+}
+.chara3 {
+    position: absolute;
+    top: 280px;
+    left: 510px;
+    width: 170px;
+    z-index: 99999999999;
+
+}
+.chara1 {
+    position: absolute;
+    top: 161px;
+    left: 900px;
+    width: 170px;
+    z-index: 99999999999;
+
+}
+.chara4 {
+    position: absolute;
+    top: 400px;
+    left: 1162px;
+    width: 170px;
+    z-index: 9;
+}
+
+.chara5 {
+    position: absolute;
+    top: 430px;
+    left: 31px;
+    width: 170px;
+    z-index: 9999999999999;
+}
+
+.stairs{
+    z-index: 99999999;
+}
+
+.chara4:hover {
+    transform: rotateX(-20deg) scale(1.15);
+}
+.chara1:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+.chara2:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+.chara3:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+.chara5:hover {
+    transform: rotateY(0deg) scale(1.15);
+}

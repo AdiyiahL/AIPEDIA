@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/users_style.css' %}">
+</head>
+<body>
+ <form class="box" action="{% url 'users:signup' %}" method="post" novalidate>
+     {% csrf_token %}
+  <h1>SignUp</h1>
+     {{ form.username }}
+     <span style="color: red; font-size: 15px">{{ form.username.errors.0 }}</span>
+     {{ form.email }}
+     <span style="color: red; font-size: 15px">{{ form.email.errors.0 }}</span>
+     {{ form.mobile }}
+     <span style="color: red; font-size: 15px">{{ form.mobile.errors.0 }}</span>
+     {{ form.age }}
+     <span style="color: red; font-size: 15px">{{ form.age.errors.0 }}</span>
+     {{ form.password }}
+     <span style="color: red; font-size: 15px">{{ form.password.errors.0 }}</span>
+     {{ form.password_confirm }}
+     <span style="color: red; font-size: 15px">{{ form.password_confirm.errors.0 }}</span>
+  <input type="submit" name="" value="Signup">
+     <span style="color: red;font-size: medium;">{{ error }}</span>
+<div class="ui message" style="font-size: 13px">
+                have an account？<a href="{% url 'users:login' %}">login</a>
+</div>
+</form>
+</body>
+</html>

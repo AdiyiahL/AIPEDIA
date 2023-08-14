@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+ {% block content %}
+     <div >
+<h2>add content</h2>
+<form  action="/content/add/content/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">TITLE</label>
+      {{ form.title }}
+{#    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="TITLE" name="title">#}
+  </div>
+
+    <div class="form-group">
+    <label for="exampleInputEmail1">classification</label>
+      {{ form.classification }}
+{#    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="TITLE" name="title">#}
+  </div>
+
+
+    <div id="app" class="form-group">
+        <label for="exampleInputPassword1">What is it?</label>
+        {{ form.what_area }}
+
+    </div>
+
+        <div class="form-group">
+        <label for="exampleInputPassword1">Here is the source</label>
+        {{ form.source }}
+{#    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="LEVEL" name="how">#}
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Do you want to Try it in the future? What is your idea about it?</label>
+        {{ form.try_area }}
+{#    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="LEVEL" name="how">#}
+    </div>
+
+    <div>
+        <input type="file" id="fileInput1" name="image1">
+    </div>
+
+  <button type="submit" class="btn btn-default">Upload</button>
+</form>
+     </div>
+{% endblock %}
+
+{% block js %}
+<script>
+var app = new Vue({
+    el:'#app',
+    data:{
+        key_num :5
+    },
+
+})
+
+</script>
+{% endblock %}

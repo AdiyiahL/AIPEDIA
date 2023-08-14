@@ -1,0 +1,153 @@
+* {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(230, 235, 248);
+        }
+
+ .navbar{
+     z-index: 99;
+ }
+
+.button1{
+  color: #414349;
+  font-family: Algerian;
+    border-radius:6px;
+    border-color: #5c79a2;
+    border-width: 1px;
+    background-color: #dbeaff;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+}
+
+.buttons{
+    position: relative;
+    left: 0px;
+    right: 0px;
+    text-align: right;
+}
+        .shell {
+            position: relative;
+            min-width: 900px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* 设置3d变化 */
+            transform-style: preserve-3d;
+            /* 添加透视效果 */
+            perspective: 900px;
+        }
+
+        .shell .box {
+            position: relative;
+            width: 170px;
+            height: 310px;
+            transition: 0.3s;
+            overflow: hidden;
+            margin: 80px;
+            transform: rotateY(0deg);
+            transition-delay: .1s;
+            border-radius: 5px;
+            border: rgb(230, 235, 248) 5px solid;
+        }
+
+        /* 当鼠标所有卡片的父元素点shell上时，
+        所有卡片像Y轴翻转20度 */
+        .shell:hover .box {
+            transform: rotateY(2deg);
+        }
+
+        /* 当鼠标悬浮在当前卡片上时，当前卡片的翻转角度为0，
+        并放大一点二五倍，加个阴影 */
+        .shell .box:hover {
+            transform: rotateY(0deg) scale(1.25);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        /* 当鼠标悬浮在卡片上时，
+        当前卡片后面的所有卡片全部都反向翻转负20度 */
+        .shell .box:hover~.box {
+            transform: rotateY(-2deg);
+        }
+
+        .shell .box .images img {
+            width: 100%;
+        }
+
+        .shell .box .content {
+            position: absolute;
+            top: 0;
+            width: 90%;
+            height: 70%;
+            z-index: 999;
+            padding: 15px;
+        }
+
+        .shell .box .content h2 {
+            color: rgb(210, 140, 140);
+            transition: 0.3s;
+            font-size: 20px;
+            transform: translateY(-80px);
+        }
+
+        .shell .box:hover .content h2 {
+            transform: translateY(-30px);
+        }
+
+        .shell .box .content p {
+            color: rgb(182, 182, 51);
+            transition: 0.3s;
+            font-size: 14px;
+            transform: translateY(500px);
+            /*background-color: rgb(230, 235, 248);*/
+            /*perspective: 900px;*/
+        }
+
+        .shell .box:hover .content p {
+            transform: translateY(50px);
+        }
+        h2{
+            font-family: Algerian;
+
+        }
+
+        /* 目录栏样式 */
+    /* 目录栏样式 */
+    .sidebar {
+      background-color: #f1f1f1;
+      float: left;
+      width: 200px;
+      padding: 10px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 5px;
+    }
+
+    .sidebar li a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .sidebar .sub-menu {
+      display: none; /* 初始隐藏子目录 */
+      padding-left: 20px;
+    }
+
+    .sidebar .sub-menu li {
+      margin-bottom: 2px;
+    }
+
+    .reading{
+        margin-left: 40px;
+    }

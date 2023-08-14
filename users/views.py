@@ -1,0 +1,106 @@
+from django.shortcuts import render
+
+import json
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.shortcuts import *
+from django.views import generic
+from users import models
+from content import models as models_content
+from django import forms
+from .forms import loginForm, signUpForm
+from django.core.validators import RegexValidator
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import HttpResponse
+# Create your views here.
+
+
+def login(request):
+    if request.method=="GET":
+        form = loginForm()
+        print(form.errors)
+        return render(request, 'register/login.html', {'form': form})
+    form = loginForm(data=request.POST)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user_object = models.UserInfo.objects.filter(name=username,pwd=password).first()
+        print(user_object)
+        if user_object:
+            request.session['user_session'] = {'id': user_object.id, 'name': user_object.name}
+            # request.session.set_expiry(60*60*24*7)
+            return redirect("/home/")
+        else:
+            return render(request, 'register/login.html', {"form":form,"error": "username or password error"})
+    else:
+        # print(form.errors)
+        return render(request, 'register/login.html', {'form': form})
+
+def admin_login(request):
+    print(11111)
+    if request.method=="GET":
+        form = loginForm()
+        print(form.errors)
+        return render(request, 'register/admin_login.html', {'form': form})
+    form = loginForm(data=request.POST)
+    print(1111111)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        admin_object = models.AdminUser.objects.filter(name=username,pwd=password).first()
+        print(admin_object)
+        if admin_object:
+            request.session['user_session'] = {'id': admin_object.id, 'name': admin_object.name}
+            # request.session.set_expiry(60*60*24*7)
+            return redirect("/content/add/courses/")
+        else:
+            return redirect("/users/choose_login/")
+    else:
+        # print(form.errors)
+        return render(request, 'register/login.html', {'form': form})
+
+def choose_login(request):
+    return render(request, 'register/choose_login.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = signUpForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            mobile = form.cleaned_data.get('mobile')
+            age = form.cleaned_data.get('age')
+            pwd = form.cleaned_data.get('password')
+            pwdconf = form.cleaned_data.get('password_confirm')
+            filterResult_username = models.UserInfo.objects.filter(name=name).first()
+            filterResult_email = models.UserInfo.objects.filter(email=email).first()
+            if filterResult_username:
+                return render(request,'register/signup.html',{"form":form,"error": "Username exists!"})
+            if filterResult_email:
+                return render(request,'register/signup.html',{"form":form,"error": "Email exists!"})
+            if pwdconf == pwd:
+                user = models.UserInfo.objects.create(name=name,email=email,mobile=mobile,age=age,pwd=pwd,subscribe=False)
+                user.save()
+                return redirect('/users/success_signup/')
+            else:
+                return render(request, 'register/signup.html', {"form":form,"error": "passwords do not match!"})
+        else:
+            # print(form.errors)
+            return render(request, 'register/signup.html', {'form': form})
+    form = signUpForm()
+    return render(request, 'register/signup.html', {'form': form})
+
+def profile(request):
+    if request.method == 'GET':
+        user_obj_id = request.user_session["id"]
+        user_obj = models.UserInfo.objects.filter(id=user_obj_id).first()
+        user_content = models_content.NewContent.objects.filter(userId_id = user_obj_id)
+        print(user_content)
+        return render(request, 'register/profile.html', {'user_obj': user_obj,'user_content': user_content})
+
+def logout(request):
+    auth_logout(request)
+    return redirect('home')
+
+
+def success_signup(request):
+    return render(request,"register/success_signup.html")
