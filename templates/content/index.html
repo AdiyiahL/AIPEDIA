@@ -13,7 +13,706 @@
 {#    <link rel="stylesheet" href="glide.theme.min.css">#}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/content_list_style.css">
+<style>
+{#homepage.css==========================================#}
+    * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+}
+
+a {
+  text-decoration: none;
+  /*font-size: 30px;*/
+}
+
+/*=============== BUTTON ===============*/
+.container {
+  height: 100vh;
+  margin-inline: 1.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.button {
+  position: relative;
+  transition: transform .4s;
+}
+
+.button__content {
+  position: relative;
+  background: var(--gradient-color);
+  padding: 1.25rem 3rem;
+  border-radius: 4rem;
+  border: 3px solid var(--black-color);
+  color: var(--black-color);
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+  overflow: hidden;
+}
+
+.button__text {
+  font-weight: 700;
+}
+
+.button__icon {
+  font-size: 1.5rem;
+}
+
+.button__text,
+.button__icon {
+  position: relative;
+  z-index: 2;
+}
+
+/* Reflection shapes */
+.button__reflection-1,
+.button__reflection-2 {
+  width: 8px;
+  height: 120px;
+  background-color: var(--reflection-color);
+  rotate: 30deg;
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: -180%;
+  margin: auto;
+  transition: left .6s cubic-bezier(.2, .5, .2, 1.2);
+}
+
+.button__reflection-1::after {
+  content: "";
+  width: 26px;
+  height: 100%;
+  background-color: var(--reflection-color);
+  position: absolute;
+  top: -1rem;
+  left: 1.25rem;
+}
+
+.button__reflection-2::after {
+  content: "";
+  width: 40px;
+  height: 100%;
+  background-color: var(--reflection-color);
+  position: absolute;
+  top: -1rem;
+  left: .8rem;
+}
+
+/* Moving geometric shapes */
+.button img {
+  position: absolute;
+  opacity: 0;
+  transition: transform .5s, opacity .5s;
+}
+
+.button__star-1 {
+  width: 20px;
+  top: -14px;
+  left: -16px;
+  transform: rotate(48deg) scale(.1);
+}
+
+.button__star-2 {
+  width: 40px;
+  right: -10px;
+  top: -4px;
+  transform: rotate(-48deg) scale(.1);
+}
+
+.button__circle-1,
+.button__circle-2 {
+  width: 8px;
+}
+
+.button__circle-1 {
+  top: -8px;
+  left: 58px;
+  transform: scale(.1);
+}
+
+.button__circle-2 {
+  right: 34px;
+  bottom: -8px;
+  transform: scale(.1);
+}
+
+.button__diamond {
+  width: 18px;
+  top: -18px;
+  right: 62px;
+  transform: scale(.1);
+}
+
+.button__triangle {
+  width: 30px;
+  left: 15px;
+  bottom: -16px;
+  transform: rotate(-48deg) scale(.1);
+}
+
+/* Gradient shadow */
+.button__shadow {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--gradient-color);
+  padding: 1.25rem 3rem;
+  border-radius: 4rem;
+  border: 3px solid var(--black-color);
+  z-index: -1;
+  transition: transform .3s;
+}
+
+/* View shadow gradient */
+.button:hover .button__shadow {
+  transform: translate(-.5rem, .5rem);
+}
+
+/* Move reflection */
+.button:hover .button__reflection-1 {
+  left: 120%;
+}
+
+.button:hover .button__reflection-2 {
+  left: -70%;
+}
+
+/* View geometric shapes */
+.button:hover {
+  transform: rotate(-4deg) scale(1.1);
+}
+
+.button:hover img {
+  opacity: 1;
+}
+
+.button:hover .button__star-1 {
+  transform: scale(1.1);
+  transition-delay: .1s;
+}
+
+.button:hover .button__star-2 {
+  transform: scale(1.1);
+}
+
+.button:hover .button__circle-1 {
+  transform: translateY(-8px) scale(1.1);
+  transition-delay: .1s;
+}
+
+.button:hover .button__circle-2 {
+  transform: translate(-20px, 20px) scale(1.1);
+}
+
+.button:hover .button__diamond {
+  transform: translateY(7px) rotate(-24deg) scale(1.1);
+}
+
+.button:hover .button__triangle {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+.button_div_left{
+position: absolute;
+
+}
+
+.button_div_right{
+  position: absolute;
+  right: 50px;
+  top: 300px;
+}
+
+{#homestairs.css#}
+    nav .container-fluid{
+    /*background-color:rgba(1,1,1,0.5);*/
+    /*background: rgba(238, 244, 252, 0.37);*/
+}
+
+.button_area{
+    position: absolute;
+    bottom: 10px;
+}
+.button_left{
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    display:inline-block;
+    margin: 10px;
+}
+.button_right{
+    position: absolute;
+    left: 200px;
+    bottom: 10px;
+    display:inline-block;
+    margin: 10px;
+}
+
+body{
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+
+    background: radial-gradient(#e5e9fd, #a7aee3);
+    overflow: hidden;
+
+}
+
+.stairs {
+    position: absolute;
+    top: 300px;
+    left: 650px;
+    width: 500px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(48deg);
+    /*animation: animate 20s linear infinite;*/
+    z-index: 999999999;
+}
+
+@keyframes animate {
+    0%{
+        transform: rotateX(-30deg) rotateY(0deg);
+    }
+    100%{
+        transform: rotateX(-30deg) rotateY(360deg);
+    }
+
+}
+.stairs .base_stair{
+    position: absolute;
+    top: 0px;
+    left: 60px;
+    width: 480px;
+    height: 300px;
+    background: #7585ce;
+    transform: rotateX(90deg) translateZ(-150px) scale(1.25);
+    filter: blur(20px);
+    opacity: 0.5;
+}
+
+.stairs .step{
+    position: absolute;
+    left: calc(60px * var(--j));
+    bottom: 0;
+    width: 60px;
+    height: calc(60px * var(--j));
+    /*background: red;*/
+    transform-style: preserve-3d;
+}
+
+.stairs .step::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 300px;
+    background: #abb5e8;
+    transform: rotateX(90deg) translateZ(150px);
+}
+
+.stairs .step:hover::before {
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+
+.stairs .step::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 60px;
+    background: #8190d2;
+    transform: rotateY(90deg) translateZ(-150px);
+}
+
+.stairs .step i{
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 100%;
+    background: #7b8acc;
+    transform-style: preserve-3d;
+    /*z-index: 999999999;*/
+}
+
+.stairs .Stairs-of-AI{
+    position: absolute;
+    display: block;
+    width: 380px;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translateZ(155px) translateX(230px) translateY(115px);
+    color: rgba(255, 255, 255, 0.93);
+    /*font-family: Algerian;*/
+    font-size: 5em;
+    font-weight: 900;
+    /*z-index: 999999999;*/
+
+    /*text-shadow: black;*/
+}
+
+.stairs .Stairs-of-AI::before{
+    content: 'Stairs of AI';
+    position: absolute;
+    color: rgba(0,0,0,0);
+    filter:blur(8px);
+    z-index:-1;
+    left: -2px;
+    top: 2px;
+}
+
+.stairs .step i:nth-child(1)
+{
+    transform: translateZ(150px);
+}
+
+.stairs .step i:nth-child(2)
+{
+    transform: translateZ(-150px);
+}
+
+.stairs .step:last-child i:nth-child(2)::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: #6979c0;
+    transform: rotateY(90deg) translate3d(-150px,0,-90px);
+}
+
+
+/*little one*/
+.stairs1 {
+    position: absolute;
+    top: 180px;
+    left: 0px;
+    width: 500px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(140deg);
+    /*animation: animate 20s linear infinite;*/
+    z-index: 999999999;
+}
+@keyframes animate {
+    0%{
+        transform: rotateX(-30deg) rotateY(0deg);
+    }
+    100%{
+        transform: rotateX(-30deg) rotateY(360deg);
+    }
+
+}
+.stairs1 .base_stair1{
+    position: absolute;
+    top: 0px;
+    left: 30px;
+    width: 300px;
+    height: 300px;
+    background: #7484cb;
+    transform: rotateX(90deg) translateZ(-150px) scale(1.25);
+    filter: blur(20px);
+    opacity: 0.5;
+}
+
+.stairs1 .step1{
+    position: absolute;
+    left: calc(50px * var(--j));
+    bottom: 0;
+    width: 50px;
+    height: calc(50px * var(--j));
+    /*background: red;*/
+    transform-style: preserve-3d;
+}
+
+.stairs1 .step1::before{
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0px;
+    width: 50px;
+    height: 270px;
+    background: #abb5ea;
+    transform: rotateX(90deg) translateZ(150px);
+}
+
+.stairs1 .step1:hover::before {
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+
+.stairs1 .step1::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 270px;
+    height: 50px;
+    background: #8191d3;
+    transform: rotateY(90deg) translateZ(-150px);
+}
+
+.stairs1 .step1 i{
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 100%;
+    background: #7a8acc;
+    transform-style: preserve-3d;
+}
+
+.stairs1 .step1 i:nth-child(1)
+{
+    transform: translateZ(135px);
+}
+
+.stairs1 .step1 i:nth-child(2)
+{
+    transform: translateZ(-135px);
+}
+
+.stairs1 .step1:last-child i:nth-child(2)::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 100%;
+    background: #6878c0;
+    transform: rotateY(90deg) translate3d(-135px,0,-85px);
+}
+{#homechara.css#}
+    .chara2 {
+    position: absolute;
+    top: 360px;
+    left: 270px;
+    width: 170px;
+    z-index: 99999999999;
+
+}
+.chara3 {
+    position: absolute;
+    top: 280px;
+    left: 510px;
+    width: 170px;
+    z-index: 99999999999;
+
+}
+.chara1 {
+    position: absolute;
+    top: 161px;
+    left: 900px;
+    width: 170px;
+    z-index: 99999999999;
+
+}
+.chara4 {
+    position: absolute;
+    top: 400px;
+    left: 1162px;
+    width: 170px;
+    z-index: 9;
+}
+
+.chara5 {
+    position: absolute;
+    top: 430px;
+    left: 31px;
+    width: 170px;
+    z-index: 9999999999999;
+}
+
+.stairs{
+    z-index: 99999999;
+}
+
+.chara4:hover {
+    transform: rotateX(-20deg) scale(1.15);
+}
+.chara1:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+.chara2:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+.chara3:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+.chara5:hover {
+    transform: rotateY(0deg) scale(1.15);
+}
+
+{#content_list_style#}
+
+        body {
+            background-color: rgb(230, 235, 248);
+        }
+
+ .navbar{
+     z-index: 99;
+ }
+
+.button1{
+  color: #414349;
+  font-family: Algerian;
+    border-radius:6px;
+    border-color: #5c79a2;
+    border-width: 1px;
+    background-color: #dbeaff;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+}
+
+.buttons{
+    position: relative;
+    left: 0px;
+    right: 0px;
+    text-align: right;
+}
+        .shell {
+            position: relative;
+            min-width: 900px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* 设置3d变化 */
+            transform-style: preserve-3d;
+            /* 添加透视效果 */
+            perspective: 900px;
+        }
+
+        .shell .box {
+            position: relative;
+            width: 170px;
+            height: 310px;
+            transition: 0.3s;
+            overflow: hidden;
+            margin: 80px;
+            transform: rotateY(0deg);
+            transition-delay: .1s;
+            border-radius: 5px;
+            border: rgb(230, 235, 248) 5px solid;
+        }
+
+        /* 当鼠标所有卡片的父元素点shell上时，
+        所有卡片像Y轴翻转20度 */
+        .shell:hover .box {
+            transform: rotateY(2deg);
+        }
+
+        /* 当鼠标悬浮在当前卡片上时，当前卡片的翻转角度为0，
+        并放大一点二五倍，加个阴影 */
+        .shell .box:hover {
+            transform: rotateY(0deg) scale(1.25);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        /* 当鼠标悬浮在卡片上时，
+        当前卡片后面的所有卡片全部都反向翻转负20度 */
+        .shell .box:hover~.box {
+            transform: rotateY(-2deg);
+        }
+
+        .shell .box .images img {
+            width: 100%;
+        }
+
+        .shell .box .content {
+            position: absolute;
+            top: 0;
+            width: 90%;
+            height: 70%;
+            z-index: 999;
+            padding: 15px;
+        }
+
+        .shell .box .content h2 {
+            color: rgb(210, 140, 140);
+            transition: 0.3s;
+            font-size: 20px;
+            transform: translateY(-80px);
+        }
+
+        .shell .box:hover .content h2 {
+            transform: translateY(-30px);
+        }
+
+        .shell .box .content p {
+            color: rgb(182, 182, 51);
+            transition: 0.3s;
+            font-size: 14px;
+            transform: translateY(500px);
+            /*background-color: rgb(230, 235, 248);*/
+            /*perspective: 900px;*/
+        }
+
+        .shell .box:hover .content p {
+            transform: translateY(50px);
+        }
+        h2{
+            font-family: Algerian;
+
+        }
+
+        /* 目录栏样式 */
+    /* 目录栏样式 */
+    .sidebar {
+      background-color: #f1f1f1;
+      float: left;
+      width: 200px;
+      padding: 10px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 5px;
+    }
+
+    .sidebar li a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .sidebar .sub-menu {
+      display: none; /* 初始隐藏子目录 */
+      padding-left: 20px;
+    }
+
+    .sidebar .sub-menu li {
+      margin-bottom: 2px;
+    }
+
+    .reading{
+        margin-left: 40px;
+    }
+
+</style>
 </head>
 
 <body>
